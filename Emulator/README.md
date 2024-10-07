@@ -12,7 +12,7 @@ cd Emulator
 python emulator.py <path_to_tar_archive>
 ```
 
-# 2. Запуск тестирования
+# 3. Запуск тестирования
 ```shell
 python tests.py
 ```
