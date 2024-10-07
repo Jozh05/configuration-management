@@ -142,5 +142,39 @@ digraph mygraph {
 
 ![example_2](https://github.com/user-attachments/assets/8bbd8eb5-8994-4555-bc0a-38098ccab79f)
 
+# Задача 4
+### Формулировка задачи
+Следующие задачи можно решать с помощью инструментов на выбор:
 
+Решатель задачи удовлетворения ограничениям (MiniZinc).
+SAT-решатель (MiniSAT).
+SMT-решатель (Z3).
+Изучить основы программирования в ограничениях. Установить MiniZinc, разобраться с основами его синтаксиса и работы в IDE.
+
+Решить на MiniZinc задачу о счастливых билетах. Добавить ограничение на то, что все цифры билета должны быть различными (подсказка: используйте all_different). Найти минимальное решение для суммы 3 цифр.
+### Решение
+```MiniZinc
+include "alldifferent.mzn";
+
+% Определяем переменные для каждой цифры билета
+array[1..6] of var 0..9: digits;
+
+% Ограничение: все цифры должны быть разными
+constraint all_different(digits);
+
+% Сумма первых трех цифр должна равняться сумме последних трех цифр
+constraint sum(digits[1..3]) = sum(digits[4..6]);
+
+% Найдем минимальное решение для суммы первых трех цифр
+var int: sum1 = sum(digits[1..3]);
+solve minimize sum1;
+
+% Читаем вывод
+output [
+    "Digits: ", show(digits), "\n",
+    "Sum of first three digits: ", show(sum1), "\n"
+];
+```
+### Ответ
+![image](https://github.com/user-attachments/assets/61b48110-d888-488a-a52c-3d66392658bd)
 
