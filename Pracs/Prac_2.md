@@ -178,3 +178,63 @@ output [
 ### Ответ
 ![image](https://github.com/user-attachments/assets/61b48110-d888-488a-a52c-3d66392658bd)
 
+
+# Задача 5
+### Формулировка задачи
+Решить на MiniZinc задачу о зависимостях пакетов для рисунка, приведенного ниже.
+![image](https://github.com/user-attachments/assets/fee5e211-23b4-46a8-86b8-508047ca42d5)
+
+### Решение
+```MiniZinc
+% Определяем количество версий для каждого компонента
+int: totalMenu = 6;        % Общее количество версий для меню
+int: totalDropdown = 5;    % Общее количество версий для выпадающего списка (dropdown)
+int: totalIcon = 2;        % Общее количество версий для иконки (icon)
+
+% Переменные для выбора версии каждого компонента
+var 1..totalMenu: menu;            % Выбранная версия для меню
+var 1..totalDropdown: dropdown;    % Выбранная версия для выпадающего списка
+var 1..totalIcon: icon;            % Выбранная версия для иконки
+
+% Массив, содержащий версии для меню в формате (major, minor, patch)
+array[1..totalMenu] of tuple(int, int, int): menuVersions = 
+  [(1,0,0), (1,1,0), (1,2,0), (1,3,0), (1,4,0), (1,5,0)];
+  
+% Массив, содержащий версии для выпадающего списка
+array[1..totalDropdown] of tuple(int, int, int): dropdownVersions = 
+  [(1,8,0), (2,0,0), (2,1,0), (2,2,0), (2,3,0)];
+  
+% Массив, содержащий версии для иконки
+array[1..totalIcon] of tuple(int, int, int): iconVersions = 
+  [(1,0,0), (2,0,0)];
+
+% Ограничения по версиям компонентов
+
+% Меню должно быть либо версии (1,0,0), либо версии (1,5,0), 
+% при этом иконка должна быть версии (1,0,0)
+constraint (menuVersions[menu] == (1,0,0) \/ 
+            (menuVersions[menu] == (1,5,0) /\ iconVersions[icon] == (1,0,0)));
+
+% Если версия меню между 1.1.0 и 1.5.0, то версия выпадающего списка должна быть 
+% либо (2,3,0), либо (2,0,0)
+constraint (menuVersions[menu].2 >= 1 /\ menuVersions[menu].2 <= 5) -> 
+          (dropdownVersions[dropdown] == (2,3,0) \/ dropdownVersions[dropdown] == (2,0,0));
+
+% Если версия меню (1,0,0), то версия выпадающего списка должна быть (1,8,0)
+constraint menuVersions[menu] == (1,0,0) -> dropdownVersions[dropdown] == (1,8,0);
+
+% Если версия выпадающего списка имеет minor версию от 0 до 3, то версия иконки должна быть (2,0,0)
+constraint (dropdownVersions[dropdown].2 >= 0 /\ dropdownVersions[dropdown].2 <= 3) -> 
+          iconVersions[icon] == (2,0,0);
+
+solve satisfy;
+
+% Вывод выбранных версий для каждого компонента
+output [
+  "Selected Menu Version: ", show(menuVersions[menu]), "\n",
+  "Selected Dropdown Version: ", show(dropdownVersions[dropdown]), "\n",
+  "Selected Icon Version: ", show(iconVersions[icon]), "\n"
+];
+```
+### Ответ
+![image](https://github.com/user-attachments/assets/1f93feba-be97-42c7-945d-c7065393fc0a)
