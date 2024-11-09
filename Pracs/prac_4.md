@@ -1,10 +1,20 @@
-# Задача 1
-### Формулировка задачи
+# Практическое задание №4. Системы контроля версий
+
+П.Н. Советов, РТУ МИРЭА
+
+Работа с Git.
+
+## Задача 1
+
 На сайте https://onlywei.github.io/explain-git-with-d3 или http://git-school.github.io/visualizing-git/ (цвета могут отличаться, есть команды undo/redo) с помощью команд эмулятора git получить следующее состояние проекта (сливаем master с first, перебазируем second на master): см. картинку ниже. Прислать свою картинку.
-<img width="700" alt="Picture_1" src="https://github.com/user-attachments/assets/332eea25-74f8-43d9-b9c9-81b99ee39f49">
-### Решение
-```bash
+
+![image](https://github.com/user-attachments/assets/0c5eb29b-3d30-4ee2-a860-9dc6207231ae)
+
+
+## Решение
+```
 git commit
+git tag in
 git branch first
 git branch second
 git commit
@@ -19,20 +29,62 @@ git commit
 git commit
 git rebase master
 git checkout master
-git merge second
-git checkout [in_hash]
-git tag in 
+git rebase second
+git checkout in
 ```
-<img width="800" alt="Picture_1" src="https://github.com/user-attachments/assets/6f8a79fa-f76a-497a-86e7-23e87da0a012">
 
-# Задача 2
-### Формулировка задачи
+![image](https://github.com/user-attachments/assets/47ce2a3d-3f85-441f-bafd-2824974a9610)
+
+---
+
+
+## Задача 2
+
 Создать локальный git-репозиторий. Задать свои имя и почту (далее – coder1). Разместить файл prog.py с какими-нибудь данными. Прислать в текстовом виде диалог с git.
-### Решение
-<img width="700" alt="Picture_1" src="https://github.com/user-attachments/assets/df96207c-d666-41bf-a513-475f1431907f">
 
-# Задача 3
-### Формулировка задачи
+## Решение
+```
+root@vd4662:~/config/task2# git init
+Initialized empty Git repository in /root/config/task2/.git/
+root@vd4662:~/config/task2# git config --global user.name "coder1"
+root@vd4662:~/config/task2# git config --global user.email "coder1@example.com"
+root@vd4662:~/config/task2# echo "# test file" > prog.py
+root@vd4662:~/config/task2# git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        prog.py
+
+nothing added to commit but untracked files present (use "git add" to track)
+root@vd4662:~/config/task2# git add prog.py
+root@vd4662:~/config/task2# git status
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   prog.py
+
+root@vd4662:~/config/task2# git commit -m "add prog.py"
+[main (root-commit) 3325ae7] add prog.py
+ 1 file changed, 1 insertion(+)
+ create mode 100644 prog.py
+root@vd4662:~/config/task2# git log --oneline
+3325ae7 (HEAD -> main) add prog.py
+root@vd4662:~/config/task2#
+```
+
+![5](https://github.com/user-attachments/assets/eddb76ad-db7b-466f-af6b-82b64e5edd0d)
+
+---
+
+
+## Задача 3
+
 Создать рядом с локальным репозиторием bare-репозиторий с именем server. Загрузить туда содержимое локального репозитория. Команда git remote -v должна выдать информацию о server! Синхронизировать coder1 с server.
 
 Клонировать репозиторий server в отдельной папке. Задать для работы с ним произвольные данные пользователя и почты (далее – coder2). Добавить файл readme.md с описанием программы. Обновить сервер.
@@ -44,6 +96,7 @@ Coder2 добавляет в readme в раздел об авторах свою
 Прислать список набранных команд и содержимое git log.
 
 Пример лога коммитов:
+
 ```
 *   commit a457d748f0dab75b4c642e964172887de3ef4e3e
 |\  Merge: 48ce283 d731ba8
@@ -76,84 +129,84 @@ Coder2 добавляет в readme в раздел об авторах свою
   
       first commit
 ```
-### Решение
-```bash
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1
-$ git init
-Initialized empty Git repository in D:/Programming/MIREA/KONFIG/Pract_4/coder1/.git/
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
+## Решение
+```
+$ git init
+Initialized empty Git repository in C:/Temp/Mikhail Krysin/coder1/.git/
+
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
 $ git config user.name "Coder 1"
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
 $ git config user.email "coder1@corp.com"
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
 $ echo "print('Hello from RTU MIREA')" > prog.py
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
 $ git add prog.py
 warning: in the working copy of 'prog.py', LF will be replaced by CRLF the next time Git touches it
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
 $ git commit -m "first commit"
-[main (root-commit) e26dc96] first commit
+[master (root-commit) 0341c1b] first commit
  1 file changed, 1 insertion(+)
  create mode 100644 prog.py
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
 $ cd ..
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin
 $ git init --bare server.git
-Initialized empty Git repository in D:/Programming/MIREA/KONFIG/Pract_4/server.git/
+Initialized empty Git repository in C:/Temp/Mikhail Krysin/server.git/
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4
-$ cd coder1
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin
+$ cd coder1/
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
 $ git remote add server ../server.git
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
 $ git remote -v
 server  ../server.git (fetch)
 server  ../server.git (push)
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
-$ git push server main
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
+$ git push server master
 Enumerating objects: 3, done.
 Counting objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 234 bytes | 234.00 KiB/s, done.
 Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
 To ../server.git
- * [new branch]      main -> main
+ * [new branch]      master -> master
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
 $ cd ..
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin
 $ git clone server.git coder2
 Cloning into 'coder2'...
 done.
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin
 $ cd coder1
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
 $ echo "Program_1 info" >> README.md
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
 $ git add README.md
 warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
 $ git commit -m "coder 1 info"
-[main 68a15ba] coder 1 info
+[master e32a685] coder 1 info
  1 file changed, 1 insertion(+)
  create mode 100644 README.md
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
-$ git push server main
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
+$ git push server master
 Enumerating objects: 4, done.
 Counting objects: 100% (4/4), done.
 Delta compression using up to 12 threads
@@ -161,108 +214,112 @@ Compressing objects: 100% (2/2), done.
 Writing objects: 100% (3/3), 279 bytes | 279.00 KiB/s, done.
 Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
 To ../server.git
-   e26dc96..68a15ba  main -> main
+   0341c1b..e32a685  master -> master
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder1 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder1 (master)
 $ cd ../coder2
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder2 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder2 (master)
 $ echo "Program_2 info" >> README.md
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder2 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder2 (master)
 $ git add README.md
 warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder2 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder2 (master)
 $ git config user.name "Coder 2"
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder2 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder2 (master)
 $ git config user.email "coder2@corp.com"
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder2 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder2 (master)
 $ git commit -m "coder2 info"
-[main c6ac512] coder2 info
+[master e3c75d8] coder2 info
  1 file changed, 1 insertion(+)
  create mode 100644 README.md
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder2 (main)
-$ git push origin main
-To D:/Programming/MIREA/KONFIG/Pract_4/server.git
- ! [rejected]        main -> main (fetch first)
-error: failed to push some refs to 'D:/Programming/MIREA/KONFIG/Pract_4/server.git'
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder2 (master)
+$ git push origin master
+To C:/Temp/Mikhail Krysin/server.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'C:/Temp/Mikhail Krysin/server.git'
 hint: Updates were rejected because the remote contains work that you do not
 hint: have locally. This is usually caused by another repository pushing to
 hint: the same ref. If you want to integrate the remote changes, use
 hint: 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder2 (main)
-$ git pull origin main
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder2 (master)
+$ git pull origin master
 remote: Enumerating objects: 4, done.
 remote: Counting objects: 100% (4/4), done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
-Unpacking objects: 100% (3/3), 259 bytes | 64.00 KiB/s, done.
-From D:/Programming/MIREA/KONFIG/Pract_4/server
- * branch            main       -> FETCH_HEAD
-   e26dc96..68a15ba  main       -> origin/main
+Unpacking objects: 100% (3/3), 259 bytes | 37.00 KiB/s, done.
+From C:/Temp/Mikhail Krysin/server
+ * branch            master     -> FETCH_HEAD
+   0341c1b..e32a685  master     -> origin/master
 Auto-merging README.md
 CONFLICT (add/add): Merge conflict in README.md
 Automatic merge failed; fix conflicts and then commit the result.
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder2 (main|MERGING)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder2 (master|MERGING)
 $ git add README.md
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder2 (main|MERGING)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder2 (master|MERGING)
 $ git commit -m "readme fix"
-[main d5257be] readme fix
+[master 6d607b0] readme fix
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder2 (main)
-$ git push origin main
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder2 (master)
+$ git push origin master
 Enumerating objects: 9, done.
 Counting objects: 100% (9/9), done.
 Delta compression using up to 12 threads
 Compressing objects: 100% (5/5), done.
-Writing objects: 100% (6/6), 620 bytes | 620.00 KiB/s, done.
+Writing objects: 100% (6/6), 613 bytes | 613.00 KiB/s, done.
 Total 6 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
-To D:/Programming/MIREA/KONFIG/Pract_4/server.git
-   68a15ba..d5257be  main -> main
+To C:/Temp/Mikhail Krysin/server.git
+   e32a685..6d607b0  master -> master
 
-ljken@Dmitrybwm MINGW64 /d/Programming/MIREA/KONFIG/Pract_4/coder2 (main)
+misha@DESKTOP-1AOHSQN MINGW64 /c/Temp/Mikhail Krysin/coder2 (master)
 $ git log --graph --all
-*   commit d5257be56a5189b1923f44894c2536ad7f05f8d0 (HEAD -> main, origin/main, origin/HEAD)
-|\  Merge: c6ac512 68a15ba
+*   commit 6d607b0fb29ec27877b4cfea1ba8265db48ecb0d (HEAD -> master, origin/master, origin/HEAD)
+|\  Merge: e3c75d8 e32a685
 | | Author: Coder 2 <coder2@corp.com>
-| | Date:   Wed Nov 6 20:34:53 2024 +0300
+| | Date:   Sat Nov 9 18:31:26 2024 +0300
 | |
 | |     readme fix
 | |
-| * commit 68a15ba92253243373430c5ca614417c1f08b8e2
+| * commit e32a68574c6a2693e2f92b5e8849813b8f8d83ea
 | | Author: Coder 1 <coder1@corp.com>
-| | Date:   Wed Nov 6 20:28:08 2024 +0300
+| | Date:   Sat Nov 9 18:28:52 2024 +0300
 | |
 | |     coder 1 info
 | |
-* | commit c6ac512ad70f08e516da97e8e17d9118d4a47a8d
+* | commit e3c75d877e0ea1c4b966aee78921025f7703f3af
 |/  Author: Coder 2 <coder2@corp.com>
-|   Date:   Wed Nov 6 20:30:03 2024 +0300
+|   Date:   Sat Nov 9 18:30:32 2024 +0300
 |
 |       coder2 info
 |
-* commit e26dc965e1f97f1d169cb178c3851d2681759ae6
+* commit 0341c1bc261a0dd38fc4225e9eaf63516fada482
   Author: Coder 1 <coder1@corp.com>
-  Date:   Wed Nov 6 20:24:53 2024 +0300
-
-      first commit
+  Date:   Sat Nov 9 18:25:38 2024 +0300
+:
 
 ```
-<img width="700" alt="Picture_1" src="https://github.com/user-attachments/assets/1f13328f-bc5b-4fa9-a226-2ccfa5f12652">
+![image](https://github.com/user-attachments/assets/fb23b408-b17c-4f6f-9473-5ab3db0518be)
 
-# Задача 4
-### Формулировка задачи
+
+---
+
+
+## Задача 4
+
 Написать программу на Питоне (или другом ЯП), которая выводит список содержимого всех объектов репозитория. Воспользоваться командой "git cat-file -p". Идеальное решение – не использовать иных сторонних команд и библиотек для работы с git.
-### Решение
-```Python
+
+## Решение
+```python
 import subprocess
 
 
@@ -287,4 +344,5 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-<img width="600" alt="Picture_1" src="https://github.com/user-attachments/assets/61c6d21b-707a-4a19-a0aa-6816f48df216">
+![image](https://github.com/user-attachments/assets/6c190867-9060-452f-b690-95332e617a69)
+
